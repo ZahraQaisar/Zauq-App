@@ -60,6 +60,8 @@ async function getNasheeds(folder) {
             playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
         })
     })
+
+    return nasheeds
 }
 
 const playMusic = (track, pause = false) => {
@@ -118,7 +120,7 @@ async function displayAlbums() {
         e.addEventListener("click", async item => {
             // console.log(item, item.currentTarget.dataset)
             nasheeds = await getNasheeds(`nasheeds/${item.currentTarget.dataset.folder}`)
-
+            playMusic(nasheeds[0])
         })
     })
 }

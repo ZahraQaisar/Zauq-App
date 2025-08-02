@@ -101,11 +101,11 @@ body {
     flex-wrap: wrap;
     margin: 30px;
     overflow-y: auto;
-    max-height: 65vh;
+    max-height: 55vh;
 }
 
 .card {
-    width: 200px;
+    width: 180px;
     padding: 10px;
     border-radius: 5px;
     background-color: #252525;
@@ -306,6 +306,7 @@ body {
 
 .hamburger{
     display: none;
+    cursor: pointer;
 }
 
 .hamburgerContainer{
@@ -400,8 +401,8 @@ body {
     }
 }
 
-@media (max-width:400px) {
+@media (max-width:450px) {
     .card{
-        width: 84vw;
+        width: auto;
     }
 }
