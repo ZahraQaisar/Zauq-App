@@ -4,7 +4,7 @@ let currentFolder;
 let nasheeds;
 
 function secToMinSec(seconds) {
-    if (isNaN(seconds || seconds < 0)) {
+    if (isNaN(seconds) || seconds < 0) {
         return "Invalid input";
     }
 
@@ -124,6 +124,7 @@ async function displayAlbums() {
     //     }
     // }
     for (const folder of folders) {
+        
         let res = await fetch(`nasheeds/${folder}/info.json`);
         let info = await res.json();
 
@@ -154,7 +155,7 @@ async function main() {
 
     // getting the list of all nasheeds
     // nasheeds = await getNasheeds("nasheeds/mynasheeds2")
-    await getNasheeds("nasheeds/folder1")
+    await getNasheeds("nasheeds/folder1");
     console.log(nasheeds)
     playMusic(nasheeds[0], true)
 
