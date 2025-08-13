@@ -27,6 +27,8 @@ async function getNasheeds(folder) {
 
     // let response = await a.text();
     console.log(data)
+    console.log("Loaded tracks from JSON:", data.tracks);
+
 
     // let div = document.createElement("div")
     // div.innerHTML = response;
