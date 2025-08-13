@@ -29,7 +29,7 @@ async function getNasheeds(folder) {
     console.log(data)
     console.log("Loaded tracks from JSON:", data.tracks);
 
-
+    //  <------------------- before deployment ------------------->
     // let div = document.createElement("div")
     // div.innerHTML = response;
 
@@ -83,6 +83,8 @@ const playMusic = (track, pause = false) => {
 }
 
 async function displayAlbums() {
+
+    //  <------------------- before deployment ------------------->
     // let a = await fetch('http://127.0.0.1:5501/nasheeds/');
 
     // let response = await a.text();
@@ -96,8 +98,9 @@ async function displayAlbums() {
 
     // let array = Array.from(anchors)
 
-    let folders = [ "folder1", "folder2", "folder3", "folder4", "folder5", "folder6", "folder7", "folder8", "folder9", "folder10", "folder11", "folder12" ];
+    let folders = ["folder1", "folder2", "folder3", "folder4", "folder5", "folder6", "folder7", "folder8", "folder9", "folder10", "folder11", "folder12"];
 
+    //  <------------------- before deployment ------------------->
 
     // for (let index = 0; index < array.length; index++) {
     //     const e = array[index];
@@ -125,8 +128,10 @@ async function displayAlbums() {
     //                 </div>`
     //     }
     // }
+
+    //  <------------------- for deployment ------------------->
     for (const folder of folders) {
-        
+
         let res = await fetch(`nasheeds/${folder}/info.json`);
         let info = await res.json();
 
@@ -229,15 +234,14 @@ async function main() {
     })
 
     // add event listener to mute the track
-    document.querySelector(".volume>img").addEventListener("click", e =>
-    {
-        if(e.target.src.includes("volume.svg")){
-            e.target.src = e.target.src.replace("volume.svg", "mute.svg") 
+    document.querySelector(".volume>img").addEventListener("click", e => {
+        if (e.target.src.includes("volume.svg")) {
+            e.target.src = e.target.src.replace("volume.svg", "mute.svg")
             currentNasheed.volume = 0;
             document.querySelector(".range").getElementsByTagName("input")[0].value = 0
         }
-        else{
-            e.target.src = e.target.src.replace("mute.svg", "volume.svg") 
+        else {
+            e.target.src = e.target.src.replace("mute.svg", "volume.svg")
             currentNasheed.volume = .1;
             document.querySelector(".range").getElementsByTagName("input")[0].value = 10
         }
