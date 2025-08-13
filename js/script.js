@@ -26,7 +26,7 @@ async function getNasheeds(folder) {
     nasheeds = data.tracks;
 
     // let response = await a.text();
-    console.log(response)
+    console.log(data)
 
     // let div = document.createElement("div")
     // div.innerHTML = response;
@@ -94,7 +94,8 @@ async function displayAlbums() {
 
     // let array = Array.from(anchors)
 
-    let folders = ["folder1", "folder2", "folder3, folder4", "folder5", "folder6", "folder7", "folder8", "folder9, folder10", "folder11", "folder12",]; 
+    let folders = [ "folder1", "folder2", "folder3", "folder4", "folder5", "folder6", "folder7", "folder8", "folder9", "folder10", "folder11", "folder12" ];
+
 
     // for (let index = 0; index < array.length; index++) {
     //     const e = array[index];
@@ -153,7 +154,7 @@ async function main() {
 
     // getting the list of all nasheeds
     // nasheeds = await getNasheeds("nasheeds/mynasheeds2")
-    await getNasheeds("nasheeds/mynasheeds")
+    await getNasheeds("nasheeds/folder1")
     console.log(nasheeds)
     playMusic(nasheeds[0], true)
 
