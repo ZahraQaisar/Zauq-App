@@ -19,23 +19,26 @@ function secToMinSec(seconds) {
 
 async function getNasheeds(folder) {
     currentFolder = folder
-    let a = await fetch(`http://127.0.0.1:5501/${folder}/`)
-    // let a = await fetch(`${folder}/`)
+    // let a = await fetch(`http://127.0.0.1:5501/${folder}/`)
 
-    let response = await a.text();
+    let res = await fetch(`${folder}/info.json`);
+    let data = await res.json();
+    nasheeds = data.tracks;
+
+    // let response = await a.text();
     console.log(response)
 
-    let div = document.createElement("div")
-    div.innerHTML = response;
+    // let div = document.createElement("div")
+    // div.innerHTML = response;
 
-    let as = div.getElementsByTagName("a")
-    nasheeds = []
-    for (let index = 0; index < as.length; index++) {
-        const element = as[index];
-        if (element.href.endsWith(".mp3")) {
-            nasheeds.push(element.href.split(`/${folder}/`)[1])
-        }
-    }
+    // let as = div.getElementsByTagName("a")
+    // nasheeds = []
+    // for (let index = 0; index < as.length; index++) {
+    //     const element = as[index];
+    //     if (element.href.endsWith(".mp3")) {
+    //         nasheeds.push(element.href.split(`/${folder}/`)[1])
+    //     }
+    // }
     // return nasheeds
     // showing all the nasheeds in the playlist
     let nasheedUL = document.querySelector(".nasheedList").getElementsByTagName("ul")[0]
@@ -78,45 +81,62 @@ const playMusic = (track, pause = false) => {
 }
 
 async function displayAlbums() {
-    let a = await fetch('http://127.0.0.1:5501/nasheeds/');
-    // let a = await fetch('nasheeds/')
+    // let a = await fetch('http://127.0.0.1:5501/nasheeds/');
 
-    let response = await a.text();
+    // let response = await a.text();
 
-    let div = document.createElement("div");
-    div.innerHTML = response;
+    // let div = document.createElement("div");
+    // div.innerHTML = response;
 
-    let anchors = div.getElementsByTagName("a");
+    // let anchors = div.getElementsByTagName("a");
 
     let cardContainer = document.querySelector(".cardContainer")
 
-    let array = Array.from(anchors)
+    // let array = Array.from(anchors)
 
-    for (let index = 0; index < array.length; index++) {
-        const e = array[index];
+    let folders = ["folder1", "folder2", "folder3, folder4", "folder5", "folder6", "folder7", "folder8", "folder9, folder10", "folder11", "folder12",]; 
+
+    // for (let index = 0; index < array.length; index++) {
+    //     const e = array[index];
 
 
-        if (e.href.includes("/nasheeds/")) {
-            let folder = e.href.split("/").slice(-1)[0];
+    //     if (e.href.includes("/nasheeds/")) {
+    //         let folder = e.href.split("/").slice(-1)[0];
 
-            let a = await fetch(`http://127.0.0.1:5501/nasheeds/${folder}/info.json`)
-            // let a = await fetch(`nasheeds/${folder}/info.json`)
+    //         let a = await fetch(`http://127.0.0.1:5501/nasheeds/${folder}/info.json`)
+    //         // let a = await fetch(`nasheeds/${folder}/info.json`)
 
-            let response = await a.json();
-            console.log(response)
+    //         let response = await a.json();
+    //         console.log(response)
 
-            cardContainer.innerHTML = cardContainer.innerHTML + `<div data-folder="${folder}" class="card">
-                        <div class="play">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                style="width: 40px; height: 40px; fill: rgb(17, 16, 16);">
-                                <path d="M8 5v14l11-7z" />
-                            </svg>
-                        </div>
-                        <img src="nasheeds/${folder}/cover.png" alt="">
-                        <h2>${response.title}</h2>
-                        <p>${response.description}</p>
-                    </div>`
-        }
+    //         cardContainer.innerHTML = cardContainer.innerHTML + `<div data-folder="${folder}" class="card">
+    //                     <div class="play">
+    //                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+    //                             style="width: 40px; height: 40px; fill: rgb(17, 16, 16);">
+    //                             <path d="M8 5v14l11-7z" />
+    //                         </svg>
+    //                     </div>
+    //                     <img src="nasheeds/${folder}/cover.png" alt="">
+    //                     <h2>${response.title}</h2>
+    //                     <p>${response.description}</p>
+    //                 </div>`
+    //     }
+    // }
+    for (const folder of folders) {
+        let res = await fetch(`nasheeds/${folder}/info.json`);
+        let info = await res.json();
+
+        cardContainer.innerHTML += `<div data-folder="${folder}" class="card">
+            <div class="play">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    style="width: 40px; height: 40px; fill: rgb(17, 16, 16);">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </div>
+            <img src="nasheeds/${folder}/cover.png" alt="">
+            <h2>${info.title}</h2>
+            <p>${info.description}</p>
+        </div>`
     }
 
     // loading playlist when card is clicked
